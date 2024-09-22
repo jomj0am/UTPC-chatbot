@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GORA-AI Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+  <div class="widget">
+    <div class="chat-container">
+<!-- User Section -->
+<section id="user-section" class="section">
+    <video autoplay muted loop id="bg-video">
+        <source src="https://videos.pexels.com/video-files/3129595/3129595-sd_640_360_30fps.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="field">
+        <div class="user-head">
+            <h2>👋 Welcome ! </h2>
+            <p> To UTPC chatbot <i class="fas fa-robot" style="background: white; color: black; padding:6px; font-size:30px; border-radius:50%;"></i></p>
+        </div>
+        <div class="Home">
+            <div class="left-side">
+                <div style="margin-left:20px;">
+                    <img src="https://utpc.or.tz/public/assets/images/utpc/small.png" alt="User" width="160px" style="margin:auto;" height="155px">
+                </div>
+            </div>
+
+            <div class="rg-side">
+                <div class="right-side">tyu</div>
+                <div><span class='sh' style='align-items:center;'> ⭐⭐⭐</span><span style="font-weight:bold;color:#ddd">______________</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="midd">
+        <h3><span class='sh'> ⭐⭐⭐</span> 💫QUICK VIEW  <span class='sh'>⭐⭐⭐</span> </h3>
+        <p>💫This is a simple chatbot designed to assist you with various queries related to GORA-AI.</p>
+        <p>🤖Feel free to ask any question. Type your message and press Enter to send.</p>
+        <p>🤖UTPC-AI is an AI model developed by the team of AI specialists in the field of Artificial Intelligence and Machine Learning.</p>
+        <p class='last'>🤖You can also visit our website at <a href="https://utpc.or.tz/" style="font-weight:600;color: blue;">Click Me</a> to learn more about UTPC.</p>
+    </div>
+</section>
+
+<style>
+    /* Video Background */
+#user-section {
+    position: relative;
+    z-index: 1;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    box-shadow: 0 0 20px black;
+}
+
+#bg-video {
+    borderS: 1px solid #ddd;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    object-fit: cover;
+    opacity: 1; /* Adjust opacity if needed */
+}
+
+/* User Head */
+.user-head {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1900ffb4;
+    color: #fff;
+    font-size: 15px;
+    margin: 1px 1px 0px 0px;
+    border-radius: 15px 15px 0 0;
+    box-shadow:0  0 4px grey;
+    border-top: 5px solid #ddd;
+}
+
+/* Home Section */
+.Home {
+    display: flex;
+}
+
+#user-section .left-side {
+    flex: 1;
+    background-color: #0004ff41;
+    margin: 1px 1px 0px 3px; 
+    border-radius: 0 0px 15px 15px;
+    height: 160px;
+    justify-content: center;
+    align-item:center;
+    border-bottom: 1px solid #ddd;
+}
+.rg-side{
+    flex: 1;
+}
+#user-section .right-side {
+   
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    background-color: #000000b7;
+    margin: 6px 5px 2px 3px; 
+    border-radius: 15px;
+    height: 130px;
+}
+
+/* Middle Section */
+.midd {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    background-color:#25252593;
+    border-radius: 15px;
+    padding: 0px;
+    font-size: 16px;
+    color: white;
+    margin: 8px;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 0 5px grey;
+    text-shadow: 0 0 6px black;
+    border-bottom: 1px solid #ddd;
+
+}
+
+.sh{
+    text-shadow: 0 0 0px grey !important;
+}
+
+.midd h3{
+    margin: 10px;
+}
+
+.midd p{
+    padding:2px;
+    margin-bottom: 5px !important;
+    margin:0px 10px;
+    font-size: 14px;
+
+}
+
+.midd .last{
+    margin-bottom: 13px !important;
+}
+
+</style>
+
+        <!-- Chat Section (default active) -->
+        <section id="chat-section" class="section active">
+            <div class="chat-header">
+
+                <h2>UTPC-AI <br> <span style='font-size:14px;'>Assistant ChatBot</span></h2>
+            </div>
+            <div class="message-container">
+                <!-- Messages will be appended here -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="user-input" placeholder="Type your message here...">
+                <button id="send-button">Send</button>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section id="menu-section" class="section">
+            <div class="menu-header">
+                <h2>Menu</h2>
+            </div>
+            <p>Hello this is Menu Page</p>
+            <!-- Additional content here -->
+        </section>
+
+
+    </div>
+            <!-- Footer with Icons -->
+            <div class="footer">
+                <i id="user-icon" class="fas fa-user"></i>
+                <i id="chat-icon" class="fas fa-comments active"></i>
+                <i id="menu-icon" class="fas fa-bars"></i>
+            </div>
+  </div>
+    <script>
+        // Select elements
+        const userSection = document.getElementById('user-section');
+        const chatSection = document.getElementById('chat-section');
+        const menuSection = document.getElementById('menu-section');
+
+        const userIcon = document.getElementById('user-icon');
+        const chatIcon = document.getElementById('chat-icon');
+        const menuIcon = document.getElementById('menu-icon');
+
+        // Function to toggle sections
+        function showSection(section) {
+            userSection.classList.remove('active');
+            chatSection.classList.remove('active');
+            menuSection.classList.remove('active');
+
+            section.classList.add('active');
+        }
+
+        // Function to activate the selected icon
+        function activateIcon(icon) {
+            userIcon.classList.remove('active');
+            chatIcon.classList.remove('active');
+            menuIcon.classList.remove('active');
+
+            icon.classList.add('active');
+        }
+
+        // Add event listeners to icons
+        userIcon.addEventListener('click', () => {
+            showSection(userSection);
+            activateIcon(userIcon);
+        });
+
+        chatIcon.addEventListener('click', () => {
+            showSection(chatSection);
+            activateIcon(chatIcon);
+        });
+
+        menuIcon.addEventListener('click', () => {
+            showSection(menuSection);
+            activateIcon(menuIcon);
+        });
+
+        // Chat message handling
+        document.getElementById('send-button').addEventListener('click', function () {
+            const userInput = document.getElementById('user-input').value;
+
+            // Display the user's message in the chat
+            const messageContainer = document.querySelector('#chat-section .message-container');
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.className = 'message-wrapper user-message';
+            userMessageDiv.innerHTML = `<i class="fas fa-user"></i> <div class="message"><span>${userInput}</span></div>`;
+            messageContainer.appendChild(userMessageDiv);
+
+            // Clear the input field
+            document.getElementById('user-input').value = '';
+
+            // Send the user's message to the Flask server (dummy fetch)
+            fetch('http://127.0.0.1:5000/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: userInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the AI's response in the chat
+                const aiResponseDiv = document.createElement('div');
+                aiResponseDiv.className = 'message-wrapper ai-response';
+                aiResponseDiv.innerHTML = `<i class="fas fa-robot"></i> <div class="message"><span>${data.response}</span></div>`;
+                messageContainer.appendChild(aiResponseDiv);
+
+                // Scroll to the bottom of the message container
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Adjusted to full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+        
+        /* Chat Container */
+        .chat-container {
+            max-width: 400px;
+            width: 100%;
+            height: 500px; /* Adjusted to full height */
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background-color: white;
+        }
+        .widget{
+            max-width:400px;
+            width: 100%;
+            box-shadow: 0 0 10px black;
+            border-radius:15px;
+            border: 1px solid #ddd;
+
+        }
+        /* Header Styles */
+        .chat-header, .user-header, .menu-header {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        /* Chat Section */
+        #chat-section,user-section,menu-section{
+            width:400px !important;
+        }
+        
+        .message-container {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: white;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding:0  20px 0 20px ;
+            background-color: transparent !important;
+            border-top: 1px solid #e0e0e0;
+            position: sticky;
+            bottom: 20px; /* Fix to bottom of the chat container */
+            z-index: 10;
+        }
+
+        .chat-input input:focus{
+            border: none;
+        }
+        
+        #user-input{
+            border: none;
+            background:#ececec8c;
+            height: 70%;
+        }
+        
+        #user-input:focus{
+            border: none;
+        }
+
+        
+        #user-input {
+            flex: 1;
+            border: none !important;
+            border-radius: 8px 0 10px 8px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        
+        #send-button {
+            width: 80px;
+            border-radius: 0 8px 8px 0;
+            border: none;
+            background-color: blue;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+            height: 50px;
+        }
+        
+        #send-button:hover {
+            background-color: #000;
+        }
+        
+        /* Message Wrapper */
+        .message-wrapper {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .message-wrapper i {
+            background: blue;
+            border-radius: 50%;
+            padding: 8px;
+            margin-right: 6px;
+            color: #fff;
+            width: 27px;
+            height: 27px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .message {
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 16px;
+            box-shadow: 0 0 2px grey;
+            flex: 1;
+        }
+        
+        .user-message .message {
+            background-color: #ffff993c;
+        }
+        
+        .ai-response .message {
+            background-color: #ececec2c;
+            box-shadow: 0 0 5px #ececec;
+        }
+        
+        /* Footer with Icons */
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-top: 1px solid #e0e0e0;
+            position: sticky;
+            bottom: 0;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .footer i {
+            font-size: 24px;
+            color: grey;
+            cursor: pointer;
+        }
+        
+        .footer i.active {
+            color: #007bff;
+        }
+        
+        /* Section Visibility */
+        .section {
+            display: none;
+            height: 100%; /* Ensure sections take full height */
+        }
+        
+        .section.active {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        
+    </style>
+</body>
+</html>

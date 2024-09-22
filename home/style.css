@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #25252593;
+    background-color:  #dddddd9f;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+#response {
+    margin-top: 20px;
+    font-weight: bold;
+}

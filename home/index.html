@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GORA-AI Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Include Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Add your existing styles here */
+    
+         
+    
+            .loader {
+                border: 5px solid #f3f3f3; /* Light grey */
+                border-top: 5px solid #007bff; /* Blue */
+                border-radius: 50%;
+                width: 14px !important;
+                height: 14px !important;
+                animation: spin 1s linear infinite;
+                display: none; /* Hide loader by default */
+                margin: 1px auto; /* Center the loader */
+            }
+    
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+    
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+    
+            .chat-container {
+                max-width: 400px;
+                width: 90%;
+                max-height: 550px;
+                height: 550px;
+                display: flex;
+                flex-direction: column;
+                margin: 50px auto;
+                padding: 0;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                border: black;
+            }
+    
+            .chat-header {
+                background-color: #007bff;
+                color: #ffffff;
+                padding: px;
+                text-align: center;
+                border-radius: 10px 10px 0px 0px;
+                align-items:center;
+                justify-content:center;
+                box-shadow: 0 0 2px grey;
+            }
+    
+            .chat-header h2{
+                text-shadow: 0  2px 0 black;
+            }
+            .chat-header img {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                max-width: 400px;
+                margin-right: 1px;
+                background:black;
+                border: 3px solid white;
+    
+            }
+            .chat-header h2 span {
+                color: #f5f5f5;
+            }
+    
+            .message-container {
+                flex: 1;
+                padding: 10px;
+                overflow-y: scroll;
+                margin-bottom: 20px;
+            }
+    
+            .message-wrapper {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 15px;
+            }
+    
+            .message {
+                padding: 10px;
+                border-radius: 10px;
+                font-size: 16px;
+                box-shadow: 0 0 2px grey;
+                flex: 1;
+            }
+    
+    
+            .chat-input {
+                display: flex;
+    
+            }
+            .message-wrapper i {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: #000;
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 5px;
+                flex-shrink: 0;
+                font-size: 22px;
+            }
+            .user-message .message{
+                background-color: #ffff99;
+            }
+         
+    
+            .ai-response .message {           
+               background-color:  #ececec2c; 
+                  box-shadow: 0 0 5px ececec7c;
+
+
+            }
+    
+            .chat-input {
+                display: flex;
+                border-top: 1px solid #e0e0e0;
+                padding: 10px;
+                background-color: #007bff;
+                padding: 20px;
+                border-radius: 0px 0px 10px 10px;
+            }
+    
+            #user-input {
+                flex: 1;
+                border: 1px solid #e0e0e0;
+                border-radius: 8px 0px 0px 8px;
+                padding: 10px;
+                margin-right: 0;
+                font-size: 16px;
+            }
+    
+            #send-button {
+                width: 80px;
+                border-radius: 0 8px 8px 0;
+                border: none;
+                background-color: grey;
+                color: #ffffff;
+                font-size: 16px;
+                cursor: pointer;
+            }
+    
+            #send-button:hover {
+                background-color: #000;
+            }
+    
+            #user-input:focus {
+                border: none;
+            }
+    
+        
+
+        .loader {
+            border: 5px solid #f3f3f3; /* Light grey */
+            border-top: 5px solid #007bff; /* Blue */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            display: none; /* Hide loader by default */
+            margin: 20px auto; /* Center the loader */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Additional styles for your chat */
+    </style>
+</head>
+
+<body>
+    <div class="chat-container">
+        <div class="chat-header" style="display:flex;">
+            <img src="https://www.utpc.or.tz/public/assets/images/utpc/" alt="GORA-AI">
+            <h2>UTPC-AI <br> <span style='font-size:14px;'>Assistant ChatBot</span></h2>
+        </div>
+        <div class="message-container">
+            <!-- Messages will be appended here -->
+        </div>
+
+        <div class="loader" id="loader"></div>
+
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Type your message here...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('send-button').addEventListener('click', function () {
+            const userInput = document.getElementById('user-input').value;
+
+            // Display the user's message in the chat
+            const messageContainer = document.querySelector('.message-container');
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.className = 'message-wrapper user-message';
+            userMessageDiv.innerHTML = `<i class="fas fa-user"></i> <div class="message"><span>${userInput}</span></div>`;
+            messageContainer.appendChild(userMessageDiv);
+
+            // Clear the input field
+            document.getElementById('user-input').value = '';
+
+            // Show the loader
+            document.getElementById('loader').style.display = 'block';
+
+            // Send the user's message to the Flask server
+            fetch('http://127.0.0.1:5000/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: userInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Hide the loader
+                document.getElementById('loader').style.display = 'none';
+
+                // Display the AI's response in the chat
+                const aiResponseDiv = document.createElement('div');
+                aiResponseDiv.className = 'message-wrapper ai-response';
+                aiResponseDiv.innerHTML = `<i class="fas fa-robot"></i> <div class="message"><span>${data.response}</span></div>`;
+                messageContainer.appendChild(aiResponseDiv);
+
+                // Scroll to the bottom of the message container
+                messageContainer.scrollTop = messageContainer.scrollHeight;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Hide the loader in case of an error
+                document.getElementById('loader').style.display = 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>
